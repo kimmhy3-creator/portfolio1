@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간호학과 1학년 | AI 크리에이티브 포트폴리오</title>
+    <style>
+        /* 기본 초기화 및 폰트 설정 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', sans-serif;
+            color: #1F2937;
+            background-color: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        /* 컬러 변수 설정 (주색: #B85042, 보조색: #E7E8D1) */
+        :root {
+            --primary-color: #B85042;
+            --primary-dark: #923B30;
+            --primary-light: #FDF6F5;
+            --secondary-color: #E7E8D1;
+            --secondary-light: #F5F6EB;
+            --text-dark: #1F2937;
+            --text-gray: #4B5563;
+            --border-color: #E5E7EB;
+        }
+
+        /* 공통 레이아웃 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 72px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: var(--secondary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .section-desc {
+            color: var(--text-gray);
+            margin-bottom: 36px;
+            font-size: 1rem;
+        }
+
+        /* 1. 상단 내비게이션 바 */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 2. 헤더 섹션 (이름, 한 줄 소개) */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: #FFFFFF;
+            padding: 96px 0;
+            text-align: center;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--primary-dark);
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 999px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: var(--secondary-color);
+            max-width: 640px;
+            margin: 0 auto 32px;
+            word-break: keep-all;
+        }
+
+        .header-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--primary-dark);
+            font-weight: 800;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+
+        .header-btn:hover {
+            background-color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 3. 소개 (About) 섹션 */
+        .about-card {
+            background-color: var(--secondary-light);
+            border: 1px solid var(--secondary-color);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .about-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .about-list li {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            word-break: keep-all;
+            line-height: 1.7;
+        }
+
+        .about-label {
+            display: inline-block;
+            font-weight: 800;
+            color: var(--primary-color);
+            min-width: 145px;
+        }
+
+        /* 4. 프로젝트 갤러리 (Projects) 섹션 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(184, 80, 66, 0.1);
+        }
+
+        .project-thumb {
+            width: 100%;
+            min-height: 240px;
+            background-color: var(--secondary-light);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        /* 작품 전체가 잘리지 않게 원본 비율 유지 */
+        .project-thumb img {
+            width: 100%;
+            height: auto;
+            max-height: 360px;
+            object-fit: contain;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .project-thumb video {
+            width: 100%;
+            height: auto;
+            max-height: 360px;
+            border-radius: 8px;
+            background-color: #000000;
+            display: block;
+        }
+
+        /* 이미지 대체 및 팟캐스트 그래픽 카드 */
+        .podcast-visual {
+            width: 100%;
+            min-height: 216px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .podcast-visual.secondary-bg {
+            background: var(--secondary-color);
+            color: var(--primary-dark);
+        }
+
+        .podcast-icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin-top: 14px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .project-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-tag {
+            display: inline-block;
+            align-self: flex-start;
+            background-color: var(--secondary-color);
+            color: var(--primary-dark);
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            word-break: keep-all;
+            flex-grow: 1;
+        }
+
+        /* 5. 스킬 (Skills) 섹션 */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .skill-box {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .skill-box h3 {
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+        }
+
+        .skill-tag.accent {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            border: 1px solid rgba(184, 80, 66, 0.25);
+        }
+
+        /* 6. 연락처 (Contact) 섹션 */
+        .contact-box {
+            background-color: var(--secondary-color);
+            border-radius: 16px;
+            padding: 40px 28px;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .contact-box p {
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            word-break: keep-all;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .contact-item {
+            background-color: #FFFFFF;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+        }
+
+        .contact-item.primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #FFFFFF;
+        }
+
+        .contact-item.primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* 복사 완료 알림 메시지 (alert 대신 사용) */
+        .toast-msg {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-height: 22px;
+        }
+
+        /* 푸터 */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 36px 20px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-ai-notice {
+            color: #FFFFFF;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        /* 모바일 및 태블릿 반응형 처리 */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            header {
+                padding: 72px 0;
+            }
+
+            header h1 {
+                font-size: 1.9rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 52px 0;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 내비게이션 -->
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="nav-logo">NURSE × AI</a>
+            <ul class="nav-links">
+                <li><a href="#about">소개</a></li>
+                <li><a href="#projects">프로젝트</a></li>
+                <li><a href="#skills">스킬</a></li>
+                <li><a href="#contact">연락처</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 1. 헤더 (이름, 한 줄 소개) -->
+    <header>
+        <div class="container">
+            <span class="header-badge">혜전대학교 간호학과 포트폴리오</span>
+            <h1>김혜원 (Kim Hyewon)</h1>
+            <p>따뜻한 돌봄의 가치에 AI 기술을 더해, 더 쉽고 유익한 건강 정보를 전하는 예비 간호사입니다.</p>
+            <a href="#projects" class="header-btn">AI 프로젝트 살펴보기 ↓</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 2. 소개 섹션 -->
+        <section id="about">
+            <h2 class="section-title">소개 (About Me)</h2>
+            <p class="section-desc">저를 소개합니다.</p>
+            <div class="about-card">
+                <ul class="about-list">
+                    <li><span class="about-label">이름</span> 김혜원</li>
+                    <li><span class="about-label">학과</span> 혜전대학교 간호학과</li>
+                    <li><span class="about-label">이번 학기 느낀 점</span> AI의 창의적 활용을 배우면서 다양한 AI를 알게 되었고 어떻게 활용을 해야하는지 배울 수 있어 좋았습니다.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. 프로젝트 갤러리 섹션 -->
+        <section id="projects">
+            <h2 class="section-title">프로젝트 갤러리 (Projects)</h2>
+            <p class="section-desc">이번 학기 AI 도구를 활용해 제작한 작품입니다.</p>
+            
+            <div class="project-grid">
+                <!-- 프로젝트 1: 인포그래픽 (images/work1.png) -->
+                <article class="project-card">
+                    <div class="project-thumb">
+                        <img src="images/work1.png" alt="간호보건계열 환자교육 인포그래픽" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="podcast-visual" style="display: none;">
+                            <span class="podcast-icon">🖼️</span>
+                            <strong>images/work1.png</strong>
+                            <small>간호보건계열 환자교육 인포그래픽</small>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-tag">AI 인포그래픽</span>
+                        <h3 class="project-title">간호보건계열 환자교육 인포그래픽</h3>
+                        <p class="project-desc">손위생 6단계, 낙상 예방, 당뇨 환자 발 관리, 흡입기 사용법, 수술 후 심호흡·기침 운동을 한눈에 보기 쉽게 정리했습니다.</p>
+                    </div>
+                </article>
+
+                <!-- 프로젝트 2: 명함 만들기 (images/work2.png) -->
+                <article class="project-card">
+                    <div class="project-thumb">
+                        <img src="images/work2.png" alt="혜전대학교 간호학과 명함 디자인" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="podcast-visual secondary-bg" style="display: none;">
+                            <span class="podcast-icon">🪪</span>
+                            <strong>images/work2.png</strong>
+                            <small>혜전대학교 간호학과 명함 디자인</small>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-tag">AI 명함 만들기</span>
+                        <h3 class="project-title">혜전대학교 간호학과 명함 디자인</h3>
+                        <p class="project-desc">간호학과의 신뢰감과 정체성을 담은 엠블럼과 차분한 청록색 컬러를 활용해 개인 명함을 제작했습니다.</p>
+                    </div>
+                </article>
+
+                <!-- 프로젝트 3: 홍보영상 (images/promo.mp4) -->
+                <article class="project-card">
+                    <div class="project-thumb">
+                        <video controls playsinline preload="metadata" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <source src="images/promo.mp4" type="video/mp4">
+                            브라우저가 비디오 재생을 지원하지 않습니다.
+                        </video>
+                        <div class="podcast-visual" style="display: none;">
+                            <span class="podcast-icon">🎬</span>
+                            <strong>images/promo.mp4</strong>
+                            <small style="color: #E7E8D1;">images 폴더에 promo.mp4를 올리면 재생됩니다.</small>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-tag">AI 홍보영상</span>
+                        <h3 class="project-title">올바른 손 씻기 6단계 손 위생 교육</h3>
+                        <p class="project-desc">손바닥 문지르기부터 손끝과 손톱 씻기까지 올바른 손 위생 6단계 절차를 직관적인 모션과 자막으로 안내하는 교육 영상입니다.</p>
+                    </div>
+                </article>
+
+                <!-- 프로젝트 4: 팟캐스트 (images/prodcast.mp4, images/podcast.mp4, images/podcast.mp3) -->
+                <article class="project-card">
+                    <div class="project-thumb">
+                        <div class="podcast-visual">
+                            <span class="podcast-icon">🎧</span>
+                            <strong>생명을 살리는 CPR, 올바른 심폐소생술</strong>
+                            <small style="color: #E7E8D1;">간호학과 학생들을 위한 응급처치 팟캐스트</small>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-tag">AI 팟캐스트</span>
+                        <h3 class="project-title">생명을 살리는 CPR, 올바른 심폐소생술</h3>
+                        <p class="project-desc">반응 확인 및 119 신고부터 가슴압박, 자동심장충격기(AED) 사용법까지 핵심 응급처치 순서를 알기 쉽게 들려주는 오디오 콘텐츠입니다.</p>
+                        <audio class="audio-player" controls preload="metadata">
+                            <source src="images/prodcast.mp4" type="video/mp4">
+                            <source src="images/podcast.mp4" type="video/mp4">
+                            <source src="images/podcast.mp3" type="audio/mpeg">
+                            브라우저가 오디오 재생을 지원하지 않습니다.
+                        </audio>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 4. 스킬 섹션 -->
+        <section id="skills">
+            <h2 class="section-title">스킬 (Skills)</h2>
+            <p class="section-desc">전공 기초 지식과 생성형 AI 활용 능력을 갖추고 있습니다.</p>
+            
+            <div class="skills-wrapper">
+                <div class="skill-box">
+                    <h3>🩺 간호·보건 기초 역량</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">기본 간호학 용어 이해</span>
+                        <span class="skill-tag">보건 교육 콘텐츠 기획</span>
+                        <span class="skill-tag">건강 정보 요약 및 전달</span>
+                        <span class="skill-tag">공감적 커뮤니케이션</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🤖 AI 콘텐츠 제작 역량</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag accent">생성형 AI 이미지·포스터</span>
+                        <span class="skill-tag accent">AI 영상 편집 및 자막 생성</span>
+                        <span class="skill-tag accent">AI 오디오·팟캐스트 제작</span>
+                        <span class="skill-tag accent">프롬프트 엔지니어링 기초</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 연락처 섹션 (개인정보 제외) -->
+        <section id="contact">
+            <h2 class="section-title">연락처 (Contact)</h2>
+            <p class="section-desc">프로젝트 관련 피드백이나 협업 제안은 언제든 환영합니다.</p>
+            
+            <div class="contact-box">
+                <h3>함께 성장할 기회를 기다립니다!</h3>
+                <p>아래 이메일 또는 포트폴리오 저장소를 통해 편하게 연락해 주세요.</p>
+                <div class="contact-links">
+                    <button type="button" class="contact-item primary" onclick="copyEmail()">
+                        ✉️ 이메일 복사 (sunone315@naver.com)
+                    </button>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-item">
+                        💻 GitHub 포트폴리오 저장소
+                    </a>
+                </div>
+                <div id="toast" class="toast-msg" aria-live="polite"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p class="footer-ai-notice">이 사이트의 글과 작품은 AI 도구의 도움으로 만들고 직접 다듬었습니다</p>
+            <p>© 2026 김혜원. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 최소한의 인터랙션 스크립트 (외부 라이브러리 없음) -->
+    <script>
+        function copyEmail() {
+            const emailText = "sunone315@naver.com";
+            const tempInput = document.createElement("input");
+            tempInput.value = emailText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById("toast");
+            toast.textContent = "이메일 주소(sunone315@naver.com)가 클립보드에 복사되었습니다!";
+            setTimeout(() => {
+                toast.textContent = "";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
